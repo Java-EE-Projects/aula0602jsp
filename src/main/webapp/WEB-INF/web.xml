@@ -11,16 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>ListServlet</display-name>
-    <servlet-name>ListServlet</servlet-name>
-    <servlet-class>servlet.ListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ListServlet</servlet-name>
-    <url-pattern>/List</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>DeleteServlet</display-name>
     <servlet-name>DeleteServlet</servlet-name>
     <servlet-class>servlet.DeleteServlet</servlet-class>

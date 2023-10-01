@@ -12,7 +12,7 @@
 <%
 	@SuppressWarnings("unchecked")
 	Map<String, String> props = (Map<String, String>) request.getAttribute("props");
-	System.out.println(props);
+	//System.out.println(props);
 %>
 
 <CENTER><h1>Propriedades</h1></CENTER>
@@ -36,6 +36,7 @@
 	 		<td align="center"> <a href="Delete?key= <%= entry.getKey() %>">Excluir</a></td>
 	 	</tr>
 	  <% } %>
+	  <% System.out.println("Listou registros"); %>
  <% } else { %>
  	<p>Nenhuma propriedade disponível. props é null</p>
  <% } %>

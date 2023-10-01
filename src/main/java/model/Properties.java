@@ -1,26 +1,20 @@
 package model;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Properties {
 	
-	private static final String FILE_NAME = "WEB-INF/props.txt";
-	private static java.util.Properties props;
+	private static java.util.Properties props = new java.util.Properties();
 	
-	static {
-		props = new java.util.Properties();
-		try {
-			props.load(new FileInputStream(FILE_NAME));
-		} catch (IOException e) {
-	        System.err.println("Erro ao carregar o arquivo de propriedades: " + e.getMessage());
-	        e.printStackTrace();
-		}
+	public static void loadProperties(InputStream input) throws IOException {
+		props.load(input);
 	}
+	
 	
 	private Properties() {
 
@@ -34,7 +28,6 @@ public class Properties {
 		while(e.hasMoreElements()) {
 			String key 		= (String) e.nextElement() ;
 			String value 	= props.getProperty(key);
-			System.out.println(key + "=" + value);
 			map.put(key, value);
 		}
 
@@ -55,6 +48,4 @@ public class Properties {
 	public static String getValue(String key) {
 		return props.getProperty(key);
 	}
-	
-	
 }
