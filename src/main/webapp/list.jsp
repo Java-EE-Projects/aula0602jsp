@@ -32,8 +32,8 @@
 	 	<tr>
 	 		<td align="center"> <%= entry.getKey() %> </td>
 	 		<td align="center"> <%= entry.getValue() %> </td>
-	 		<td align="center"> <a href="Edit?key= <%= entry.getKey() %>">Editar</a></td>
-	 		<td align="center"> <a href="Delete?key= <%= entry.getKey() %>">Excluir</a></td>
+	 		<td align="center"> <a href="Edit?key=<%=entry.getKey()%>">Editar</a></td>
+	 		<td align="center"> <a href="Delete?key=<%=entry.getKey()%>">Excluir</a></td>
 	 	</tr>
 	  <% } %>
 	  <% System.out.println("Listou registros"); %>

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ import jakarta.servlet.ServletContext;
 public class Properties {
 	
     private static java.util.Properties props = new java.util.Properties();
-    private static final String RESOURCE_PATH = "/WEB-INF/props.txt";
+    private static final String RESOURCE_PATH = "/Users/lucianomoreiradonascimento/Downloads/props.txt";
     private static ServletContext servletContext;
 
     // Método para configurar ServletContext
@@ -22,7 +23,7 @@ public class Properties {
     }
 
     public static void loadProperties() throws IOException {
-        try (InputStream input = servletContext.getResourceAsStream(RESOURCE_PATH)) {
+        try (InputStream input = new FileInputStream(RESOURCE_PATH)) {
             if (input == null) {
                 throw new IOException("Não foi possível obter o stream para " + RESOURCE_PATH);
             }
@@ -53,8 +54,7 @@ public class Properties {
 	
 	public static void delete(String key) throws IOException {
 	    props.remove(key);
-	    String realPath = servletContext.getRealPath(RESOURCE_PATH); 
-	    try (OutputStream output = new FileOutputStream(realPath)) {
+	    try (OutputStream output = new FileOutputStream(RESOURCE_PATH)) {
 	        props.store(output, "");
 	    }
 	}
@@ -62,8 +62,7 @@ public class Properties {
 	
 	public static void save(String key, String value) throws IOException {
 	    props.setProperty(key, value);
-	    String realPath = servletContext.getRealPath(RESOURCE_PATH); 
-	    try (OutputStream output = new FileOutputStream(realPath)) {
+	    try (OutputStream output = new FileOutputStream(RESOURCE_PATH)) {
 	        props.store(output, null);
 	    }
 	}	

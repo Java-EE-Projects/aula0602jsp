@@ -27,11 +27,11 @@
 <table>
 <tr>
 	<td>Chave:</td>
-	<td> <input type="text" name="key" value=" <%=key%>"></td>
+	<td> <input type="text" name="key" value="<%=key%>"></td>
 </tr>
 <tr>
 	<td>Valor:</td>
-	<td><input type="text" name="value" value=" <%=value%>"></td>
+	<td><input type="text" name="value" value="<%=value%>"></td>
 </tr>
 <tr>
 	<td colspan="2" align="right"><input type="submit" value="Salvar"></td>
