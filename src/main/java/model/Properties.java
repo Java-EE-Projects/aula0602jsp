@@ -3,17 +3,33 @@ package model;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.TreeMap;
 
+import jakarta.servlet.ServletContext;
+
 public class Properties {
 	
-	private static java.util.Properties props = new java.util.Properties();
-	
-	public static void loadProperties(InputStream input) throws IOException {
-		props.load(input);
-	}
+    private static java.util.Properties props = new java.util.Properties();
+    private static final String RESOURCE_PATH = "/WEB-INF/props.txt";
+    private static ServletContext servletContext;
+
+    // Método para configurar ServletContext
+    public static void setServletContext(ServletContext context) {
+        servletContext = context;
+    }
+
+    public static void loadProperties() throws IOException {
+        try (InputStream input = servletContext.getResourceAsStream(RESOURCE_PATH)) {
+            if (input == null) {
+                throw new IOException("Não foi possível obter o stream para " + RESOURCE_PATH);
+            }
+            //System.out.println(props);
+            props.load(input);
+        }
+    }
 	
 	
 	private Properties() {
@@ -36,14 +52,21 @@ public class Properties {
 	}
 	
 	public static void delete(String key) throws IOException {
-		props.remove(key);
-		props.store(new FileOutputStream(FILE_NAME),"");
+	    props.remove(key);
+	    String realPath = servletContext.getRealPath(RESOURCE_PATH); 
+	    try (OutputStream output = new FileOutputStream(realPath)) {
+	        props.store(output, "");
+	    }
 	}
 	
+	
 	public static void save(String key, String value) throws IOException {
-		props.setProperty(key, value);
-		props.store(new FileOutputStream(FILE_NAME), "");
-	}
+	    props.setProperty(key, value);
+	    String realPath = servletContext.getRealPath(RESOURCE_PATH); 
+	    try (OutputStream output = new FileOutputStream(realPath)) {
+	        props.store(output, null);
+	    }
+	}	
 	
 	public static String getValue(String key) {
 		return props.getProperty(key);
